@@ -6,5 +6,15 @@
   {{>leaderboard}}
 </body>
 <template name="leaderboard">
-  Hello world
+  <ul>
+    {{#each player}}
+      <li class="player">{{name}}:{{score}}</li>
+    {{/each}}
+    <li>
+      <input type="submit" id="addPoint" value='give 1 points'>
+    </li>
+    <li>
+      <input type="text" id="addPlayerName">
+    </li>
+</ul>
 </template>
