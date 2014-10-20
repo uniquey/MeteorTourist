@@ -5,8 +5,6 @@ if(Meteor.isClient){
     return PlayersList.find();
   };
   Template.leaderboard.events({
-    'dblclick li.player' : function(){
-      console.log("You double-clicked player's list item")},
     'focus input' :  function(){
       console.log("You focus to the input")},
     'blur input' :  function(){
@@ -19,5 +17,7 @@ if(Meteor.isClient){
       console.log("You are keying down")},
     'submit' : function(){
       console.log("Submit the input")},
+    'dblclick li.player' : function(){
+      Session.set('selectedPlayer',"Session value test")}, 
   });
 };
