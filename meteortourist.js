@@ -10,6 +10,13 @@ if(Meteor.isClient){
       Session.set('selectedPlayer',playerId);
       var selectedPlayer = Session.get('selectedPlayer'); 
       console.log(selectedPlayer);
+    },
+    'click #increment': function(){
+      var selectedPlayer = Session.get('selectedPlayer');
+      PlayersList.update(
+        {_id: selectedPlayer},
+        {$set: {score:1}}
+      );
     }
   });
   Template.leaderboard.selectedClass = function(){
