@@ -1,8 +1,15 @@
 <head>
-  <title>Leaderboard</title>
+  <title>Scoreboard</title>
 </head>
 <body>
-  <h1>Leaderboard</h1>
+  {{>loginButtons}}
+  <h1>Scoreboard</h1>
+  {{#if currentUser}}
+    <p>You're logged in. Let's beggin.</p>
+    {{else}}
+      <p>You'd better sign in now.</p>
+  {{/if}}
+
   {{>leaderboard}}
   {{>addPlayerForm}}
 </body>
@@ -12,7 +19,10 @@
       <li class="player {{selectedClass}}">{{name}}:{{score}}</li>
     {{/each}}
     <li>
-      <input type="button" id="increment" value='give 1 points'>
+      <form>
+         <input type="button" id="increment" value='give 1 point'>
+          <input type="button" id="decrement" value='take 1 point'>
+      </form>
     </li>
     <li>
       {{#if showSelectedPlayer}}

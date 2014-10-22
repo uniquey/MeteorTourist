@@ -5,7 +5,11 @@ PlayersList = new Meteor.Collection('players')
 if(Meteor.isClient){
   //******按一定的顺序显示数据库中的Collection里的内容
   Template.leaderboard.player = function(){
-    return PlayersList.find({},{sort:{score: -1}});
+    var currentUserId = Meteor.userId();
+    return PlayersList.find(
+      {createdBy: currentUserId},
+      {sort:{score: -1, name: 1}}
+      );
     //'-1'here means to sort in descending order-
       //meaning from the highest number to the lowest
       //or from Z to A 
@@ -31,10 +35,20 @@ if(Meteor.isClient){
 	  //or the score one will instead the _id:selectedPlayer 
       );
     },
-
+      
+    //*******点击Id为remove的东西时,从Collection中移除该信息
     'click #remove' : function(){
       var selectedPlayer = Session.get('selectedPlayer');
       PlayersList.remove(selectedPlayer);
+    },
+
+    //*********点击Id为decrement的东西时,减去1分
+    'click #decrement': function(){
+      var selectedPlayer = Session.get('selectedPlayer');
+      PlayersList.update(
+        {_id:selectedPlayer},
+        {$inc:{score: -1}}
+        );
     }
   });
 
@@ -46,14 +60,18 @@ if(Meteor.isClient){
     return PlayersList.findOne(selectedPlayer);
   }
 
+  
+  //按type为submit的东西或回车时,在Collection中增加一个新的元素
   Template.addPlayerForm.events({
     'submit form': function(theEvent, theTemplate){
       //If an Id needed here, add like this: submit form#Id name
       theEvent.preventDefault();
       var playerNameVar = theTemplate.find('#playerName').value
+      var currentUserId = Meteor.userId();
       PlayersList.insert({
         name: playerNameVar,
-        score: 0
+        score: 0,
+        createdBy: currentUserId
       })
     }
   })
