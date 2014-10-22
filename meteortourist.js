@@ -30,6 +30,11 @@ if(Meteor.isClient){
         //pay attention that the '$set'or'$inc'must be here ,
 	  //or the score one will instead the _id:selectedPlayer 
       );
+    },
+
+    'click #remove' : function(){
+      var selectedPlayer = Session.get('selectedPlayer');
+      PlayersList.remove(selectedPlayer);
     }
   });
 
