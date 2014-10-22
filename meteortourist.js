@@ -1,8 +1,17 @@
 PlayersList = new Meteor.Collection('players')
 
 
+if(Meteor.isServer){
+  Meteor.publish('thePlayers',function(){
+    var currentUserId = this.userId;
+    return PlayersList.find({createdBy: currentUserId});
+  });
+  console.log(PlayersList.find().fetch());
+}
+
 
 if(Meteor.isClient){
+  Meteor.subscribe('thePlayers');
   //******按一定的顺序显示数据库中的Collection里的内容
   Template.leaderboard.player = function(){
     var currentUserId = Meteor.userId();
