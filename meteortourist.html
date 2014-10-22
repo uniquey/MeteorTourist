@@ -4,6 +4,7 @@
 <body>
   <h1>Leaderboard</h1>
   {{>leaderboard}}
+  {{>addPlayerForm}}
 </body>
 <template name="leaderboard">
   <ul>
@@ -16,5 +17,16 @@
     <li>
       <input type="text" id="addPlayerName">
     </li>
+    <li>
+      {{#if showSelectedPlayer}}
+        Selected Player : {{showSelectedPlayer.name}}
+      {{/if}}
+    </li>
 </ul>
+</template>
+<template name= "addPlayerForm">
+    <form>
+      <input type = "text" id = "playerName">
+      <input type="submit" value ="Add Player" >
+    </form>
 </template>
