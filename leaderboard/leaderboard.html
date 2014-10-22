@@ -1,0 +1,18 @@
+<template name="leaderboard">
+  <ul>
+    {{#each player}}
+      <li class="player {{selectedClass}}">{{name}}:{{score}}</li>
+    {{/each}}
+    <li>
+      {{>modifyScore}}
+    </li>
+    <li>
+      {{#if showSelectedPlayer}}
+        Selected Player : {{showSelectedPlayer.name}}
+      {{/if}}
+    </li>
+    <li>
+      <input type="button" id="remove" value='Choose Player and Delete It'>
+    </li>
+</ul>
+</template>
