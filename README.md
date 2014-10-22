@@ -4,6 +4,6 @@ MeteorTourist
 
 Finish the book~!
 
-待完成后续工作:
+待完成后续功课:
 转成coffeescript 
 可转jade
